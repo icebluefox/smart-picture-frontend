@@ -132,7 +132,7 @@
                             class="flex-1 text-left"
                         >
                           <span class="font-medium text-red-500">退出登录</span>
-                          <p class="mt-0.5 text-xs text-gray-500">退出当前账号</p>
+                          <p class="mt-0.5 text-xs text-gray-500" >退出当前账号</p>
                         </button>
                       </div>
                     </div>

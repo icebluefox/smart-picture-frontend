@@ -12,6 +12,7 @@
     "useDefineForClassFields": true,
     "sourceMap": true,
     "baseUrl": ".",
+    "noEmitOnError": false,
     "lib": [
       "ESNext",
       "DOM",

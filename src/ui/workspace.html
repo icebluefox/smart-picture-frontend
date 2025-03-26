@@ -1,0 +1,296 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>工作空间 - 图库共享</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body class="bg-gray-50 font-sans">
+    <!-- 导航栏 -->
+    <nav class="bg-white shadow-sm sticky top-0 z-50">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between h-16">
+                <div class="flex">
+                    <div class="flex-shrink-0 flex items-center">
+                        <a href="index.html">
+                            <span class="text-indigo-600 text-xl font-bold">图库共享</span>
+                        </a>
+                    </div>
+                    <div class="hidden sm:ml-6 sm:flex sm:space-x-8">
+                        <a href="index.html" class="border-transparent text-gray-500 hover:border-gray-300 hover:text-gray-700 inline-flex items-center px-1 pt-1 border-b-2 text-sm font-medium">首页</a>
+                        <a href="explore.html" class="border-transparent text-gray-500 hover:border-gray-300 hover:text-gray-700 inline-flex items-center px-1 pt-1 border-b-2 text-sm font-medium">探索</a>
+                        <a href="workspace.html" class="border-indigo-500 text-gray-900 inline-flex items-center px-1 pt-1 border-b-2 text-sm font-medium">工作空间</a>
+                        <a href="community.html" class="border-transparent text-gray-500 hover:border-gray-300 hover:text-gray-700 inline-flex items-center px-1 pt-1 border-b-2 text-sm font-medium">社区</a>
+                    </div>
+                </div>
+                <div class="hidden sm:ml-6 sm:flex sm:items-center">
+                    <!-- 搜索框 -->
+                    <div class="relative">
+                        <input type="text" placeholder="搜索素材..." class="bg-gray-100 rounded-full py-2 px-4 w-64 focus:outline-none focus:ring-2 focus:ring-indigo-500">
+                        <button class="absolute right-0 top-0 mt-2 mr-3 text-gray-400">
+                            <i class="fas fa-search"></i>
+                        </button>
+                    </div>
+                    
+                    <!-- 上传按钮 -->
+                    <a href="upload.html" class="ml-4 px-4 py-2 border border-transparent rounded-md shadow-sm text-sm font-medium text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500">
+                        上传素材
+                    </a>
+                    
+                    <!-- 用户菜单 -->
+                    <div class="ml-4 relative">
+                        <button class="rounded-full flex text-sm focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500">
+                            <img class="h-8 w-8 rounded-full" src="https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80" alt="用户头像">
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- 主要内容 -->
+    <main class="py-8">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <!-- 顶部区域 -->
+            <div class="flex justify-between items-center mb-6">
+                <h1 class="text-3xl font-bold text-gray-900">我的工作空间</h1>
+                <button class="px-4 py-2 border border-transparent rounded-md shadow-sm text-sm font-medium text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500">
+                    创建新项目
+                </button>
+            </div>
+
+            <!-- 工作空间导航 -->
+            <div class="bg-white shadow rounded-lg mb-8">
+                <div class="flex border-b border-gray-200">
+                    <button class="px-6 py-4 text-indigo-600 border-b-2 border-indigo-500 font-medium text-sm focus:outline-none">
+                        我的项目
+                    </button>
+                    <button class="px-6 py-4 text-gray-500 font-medium text-sm hover:text-gray-700 focus:outline-none">
+                        共享项目
+                    </button>
+                    <button class="px-6 py-4 text-gray-500 font-medium text-sm hover:text-gray-700 focus:outline-none">
+                        收藏项目
+                    </button>
+                    <button class="px-6 py-4 text-gray-500 font-medium text-sm hover:text-gray-700 focus:outline-none">
+                        归档项目
+                    </button>
+                </div>
+            </div>
+
+            <!-- 项目列表 -->
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                <!-- 活跃项目卡片 1 -->
+                <div class="bg-white rounded-lg shadow-sm overflow-hidden hover:shadow-md transition-shadow duration-300">
+                    <div class="h-36 bg-indigo-100 relative">
+                        <div class="absolute inset-0 flex items-center justify-center">
+                            <div class="grid grid-cols-2 gap-1">
+                                <img src="https://images.unsplash.com/photo-1523731407965-2430cd12f5e4?ixlib=rb-1.2.1&auto=format&fit=crop&w=300&q=80" class="w-full h-16 object-cover rounded-sm" alt="项目缩略图">
+                                <img src="https://images.unsplash.com/photo-1557804506-669a67965ba0?ixlib=rb-1.2.1&auto=format&fit=crop&w=300&q=80" class="w-full h-16 object-cover rounded-sm" alt="项目缩略图">
+                                <img src="https://images.unsplash.com/photo-1517245386807-bb43f82c33c4?ixlib=rb-1.2.1&auto=format&fit=crop&w=300&q=80" class="w-full h-16 object-cover rounded-sm" alt="项目缩略图">
+                                <img src="https://images.unsplash.com/photo-1434626881859-194d67b2b86f?ixlib=rb-1.2.1&auto=format&fit=crop&w=300&q=80" class="w-full h-16 object-cover rounded-sm" alt="项目缩略图">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="p-4">
+                        <a href="project.html?id=1" class="block">
+                            <h3 class="text-lg font-semibold text-gray-900 hover:text-indigo-600">夏季营销活动</h3>
+                        </a>
+                        <p class="text-gray-600 text-sm mt-1">最后更新：2023-07-15</p>
+                        <div class="mt-4 flex justify-between items-center">
+                            <div class="flex -space-x-2">
+                                <img class="h-7 w-7 rounded-full ring-2 ring-white" src="https://images.unsplash.com/photo-1500648767791-00dcc994a43e?ixlib=rb-1.2.1&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80" alt="用户头像">
+                                <img class="h-7 w-7 rounded-full ring-2 ring-white" src="https://images.unsplash.com/photo-1494790108377-be9c29b29330?ixlib=rb-1.2.1&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80" alt="用户头像">
+                                <img class="h-7 w-7 rounded-full ring-2 ring-white" src="https://images.unsplash.com/photo-1599566150163-29194dcaad36?ixlib=rb-1.2.1&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80" alt="用户头像">
+                            </div>
+                            <span class="text-sm text-gray-500">32 张素材</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 活跃项目卡片 2 -->
+                <div class="bg-white rounded-lg shadow-sm overflow-hidden hover:shadow-md transition-shadow duration-300">
+                    <div class="h-36 bg-amber-50 relative">
+                        <div class="absolute inset-0 flex items-center justify-center">
+                            <div class="grid grid-cols-2 gap-1">
+                                <img src="https://images.unsplash.com/photo-1520333789090-1afc82db536a?ixlib=rb-1.2.1&auto=format&fit=crop&w=300&q=80" class="w-full h-16 object-cover rounded-sm" alt="项目缩略图">
+                                <img src="https://images.unsplash.com/photo-1504384308090-c894fdcc538d?ixlib=rb-1.2.1&auto=format&fit=crop&w=300&q=80" class="w-full h-16 object-cover rounded-sm" alt="项目缩略图">
+                                <img src="https://images.unsplash.com/photo-1542744173-8e7e53415bb0?ixlib=rb-1.2.1&auto=format&fit=crop&w=300&q=80" class="w-full h-16 object-cover rounded-sm" alt="项目缩略图">
+                                <img src="https://images.unsplash.com/photo-1568992687947-868a62a9f521?ixlib=rb-1.2.1&auto=format&fit=crop&w=300&q=80" class="w-full h-16 object-cover rounded-sm" alt="项目缩略图">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="p-4">
+                        <a href="project.html?id=2" class="block">
+                            <h3 class="text-lg font-semibold text-gray-900 hover:text-indigo-600">品牌重塑计划</h3>
+                        </a>
+                        <p class="text-gray-600 text-sm mt-1">最后更新：2023-07-10</p>
+                        <div class="mt-4 flex justify-between items-center">
+                            <div class="flex -space-x-2">
+                                <img class="h-7 w-7 rounded-full ring-2 ring-white" src="https://images.unsplash.com/photo-1500648767791-00dcc994a43e?ixlib=rb-1.2.1&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80" alt="用户头像">
+                                <img class="h-7 w-7 rounded-full ring-2 ring-white" src="https://images.unsplash.com/photo-1438761681033-6461ffad8d80?ixlib=rb-1.2.1&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80" alt="用户头像">
+                            </div>
+                            <span class="text-sm text-gray-500">24 张素材</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 活跃项目卡片 3 -->
+                <div class="bg-white rounded-lg shadow-sm overflow-hidden hover:shadow-md transition-shadow duration-300">
+                    <div class="h-36 bg-emerald-50 relative">
+                        <div class="absolute inset-0 flex items-center justify-center">
+                            <div class="grid grid-cols-2 gap-1">
+                                <img src="https://images.unsplash.com/photo-1551434678-e076c223a692?ixlib=rb-1.2.1&auto=format&fit=crop&w=300&q=80" class="w-full h-16 object-cover rounded-sm" alt="项目缩略图">
+                                <img src="https://images.unsplash.com/photo-1502945015378-0e284ca1a5be?ixlib=rb-1.2.1&auto=format&fit=crop&w=300&q=80" class="w-full h-16 object-cover rounded-sm" alt="项目缩略图">
+                                <img src="https://images.unsplash.com/photo-1579202673506-ca3ce28943ef?ixlib=rb-1.2.1&auto=format&fit=crop&w=300&q=80" class="w-full h-16 object-cover rounded-sm" alt="项目缩略图">
+                                <img src="https://images.unsplash.com/photo-1525498128493-380d1990a112?ixlib=rb-1.2.1&auto=format&fit=crop&w=300&q=80" class="w-full h-16 object-cover rounded-sm" alt="项目缩略图">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="p-4">
+                        <a href="project.html?id=3" class="block">
+                            <h3 class="text-lg font-semibold text-gray-900 hover:text-indigo-600">社交媒体内容</h3>
+                        </a>
+                        <p class="text-gray-600 text-sm mt-1">最后更新：2023-07-05</p>
+                        <div class="mt-4 flex justify-between items-center">
+                            <div class="flex -space-x-2">
+                                <img class="h-7 w-7 rounded-full ring-2 ring-white" src="https://images.unsplash.com/photo-1500648767791-00dcc994a43e?ixlib=rb-1.2.1&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80" alt="用户头像">
+                                <img class="h-7 w-7 rounded-full ring-2 ring-white" src="https://images.unsplash.com/photo-1534528741775-53994a69daeb?ixlib=rb-1.2.1&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80" alt="用户头像">
+                                <img class="h-7 w-7 rounded-full ring-2 ring-white" src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?ixlib=rb-1.2.1&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80" alt="用户头像">
+                                <img class="h-7 w-7 rounded-full ring-2 ring-white" src="https://images.unsplash.com/photo-1501196354995-cbb51c65aaea?ixlib=rb-1.2.1&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80" alt="用户头像">
+                            </div>
+                            <span class="text-sm text-gray-500">48 张素材</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 创建新项目卡片 -->
+                <div class="bg-white rounded-lg shadow-sm border-2 border-dashed border-gray-300 p-6 flex flex-col items-center justify-center text-center hover:border-indigo-500 transition-colors duration-300 cursor-pointer">
+                    <div class="h-12 w-12 rounded-full bg-indigo-100 flex items-center justify-center mb-3">
+                        <i class="fas fa-plus text-indigo-600 text-lg"></i>
+                    </div>
+                    <h3 class="text-lg font-medium text-gray-900">创建新项目</h3>
+                    <p class="mt-1 text-sm text-gray-500">开始一个新的素材协作项目</p>
+                </div>
+            </div>
+
+            <!-- 最近活动 -->
+            <div class="mt-12">
+                <h2 class="text-xl font-semibold text-gray-900 mb-4">最近活动</h2>
+                <div class="bg-white shadow rounded-lg divide-y divide-gray-200">
+                    <!-- 活动项目 1 -->
+                    <div class="p-4 hover:bg-gray-50">
+                        <div class="flex items-start">
+                            <img class="h-10 w-10 rounded-full" src="https://images.unsplash.com/photo-1494790108377-be9c29b29330?ixlib=rb-1.2.1&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80" alt="用户头像">
+                            <div class="ml-3 flex-1">
+                                <div class="flex items-center justify-between">
+                                    <div>
+                                        <span class="text-sm font-medium text-gray-900">李华</span>
+                                        <span class="text-sm text-gray-500 ml-1">上传了 5 张新图片到</span>
+                                        <a href="project.html?id=1" class="text-sm font-medium text-indigo-600 hover:text-indigo-500">夏季营销活动</a>
+                                    </div>
+                                    <span class="text-sm text-gray-500">2 小时前</span>
+                                </div>
+                                <div class="mt-2 flex space-x-2 overflow-x-auto">
+                                    <img src="https://images.unsplash.com/photo-1523731407965-2430cd12f5e4?ixlib=rb-1.2.1&auto=format&fit=crop&w=100&q=80" class="h-16 w-16 rounded object-cover flex-shrink-0" alt="上传的图片">
+                                    <img src="https://images.unsplash.com/photo-1557804506-669a67965ba0?ixlib=rb-1.2.1&auto=format&fit=crop&w=100&q=80" class="h-16 w-16 rounded object-cover flex-shrink-0" alt="上传的图片">
+                                    <img src="https://images.unsplash.com/photo-1517245386807-bb43f82c33c4?ixlib=rb-1.2.1&auto=format&fit=crop&w=100&q=80" class="h-16 w-16 rounded object-cover flex-shrink-0" alt="上传的图片">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- 活动项目 2 -->
+                    <div class="p-4 hover:bg-gray-50">
+                        <div class="flex items-start">
+                            <img class="h-10 w-10 rounded-full" src="https://images.unsplash.com/photo-1438761681033-6461ffad8d80?ixlib=rb-1.2.1&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80" alt="用户头像">
+                            <div class="ml-3 flex-1">
+                                <div class="flex items-center justify-between">
+                                    <div>
+                                        <span class="text-sm font-medium text-gray-900">赵敏</span>
+                                        <span class="text-sm text-gray-500 ml-1">对</span>
+                                        <a href="project.html?id=2" class="text-sm font-medium text-indigo-600 hover:text-indigo-500">品牌重塑计划</a>
+                                        <span class="text-sm text-gray-500">添加了评论</span>
+                                    </div>
+                                    <span class="text-sm text-gray-500">昨天</span>
+                                </div>
+                                <div class="mt-2 p-3 bg-gray-100 rounded-lg text-sm text-gray-700">
+                                    这些素材很棒，但我觉得我们还需要一些更多元化的图片，能够展示不同的顾客群体。
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- 活动项目 3 -->
+                    <div class="p-4 hover:bg-gray-50">
+                        <div class="flex items-start">
+                            <img class="h-10 w-10 rounded-full" src="https://images.unsplash.com/photo-1501196354995-cbb51c65aaea?ixlib=rb-1.2.1&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80" alt="用户头像">
+                            <div class="ml-3 flex-1">
+                                <div class="flex items-center justify-between">
+                                    <div>
+                                        <span class="text-sm font-medium text-gray-900">刘伟</span>
+                                        <span class="text-sm text-gray-500 ml-1">创建了新项目</span>
+                                        <a href="project.html?id=3" class="text-sm font-medium text-indigo-600 hover:text-indigo-500">社交媒体内容</a>
+                                    </div>
+                                    <span class="text-sm text-gray-500">3 天前</span>
+                                </div>
+                                <div class="mt-2 text-sm text-gray-600">
+                                    项目将用于管理所有社交媒体平台的图片素材，包括微博、微信和小红书。
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <!-- 页脚 -->
+    <footer class="bg-gray-800 text-white mt-12">
+        <div class="max-w-7xl mx-auto px-4 py-12 sm:px-6 lg:px-8">
+            <div class="grid grid-cols-1 md:grid-cols-4 gap-8">
+                <div>
+                    <h3 class="text-lg font-semibold mb-4">图库共享</h3>
+                    <p class="text-gray-400">智能协同图片素材网，为创作者提供完美的协作平台。</p>
+                </div>
+                <div>
+                    <h3 class="text-lg font-semibold mb-4">快速链接</h3>
+                    <ul class="space-y-2">
+                        <li><a href="index.html" class="text-gray-400 hover:text-white">首页</a></li>
+                        <li><a href="explore.html" class="text-gray-400 hover:text-white">探索</a></li>
+                        <li><a href="workspace.html" class="text-gray-400 hover:text-white">工作空间</a></li>
+                        <li><a href="community.html" class="text-gray-400 hover:text-white">社区</a></li>
+                    </ul>
+                </div>
+                <div>
+                    <h3 class="text-lg font-semibold mb-4">关于我们</h3>
+                    <ul class="space-y-2">
+                        <li><a href="#" class="text-gray-400 hover:text-white">公司简介</a></li>
+                        <li><a href="#" class="text-gray-400 hover:text-white">联系我们</a></li>
+                        <li><a href="#" class="text-gray-400 hover:text-white">加入我们</a></li>
+                        <li><a href="#" class="text-gray-400 hover:text-white">帮助中心</a></li>
+                    </ul>
+                </div>
+                <div>
+                    <h3 class="text-lg font-semibold mb-4">关注我们</h3>
+                    <div class="flex space-x-4">
+                        <a href="#" class="text-gray-400 hover:text-white"><i class="fab fa-weixin fa-lg"></i></a>
+                        <a href="#" class="text-gray-400 hover:text-white"><i class="fab fa-weibo fa-lg"></i></a>
+                        <a href="#" class="text-gray-400 hover:text-white"><i class="fab fa-github fa-lg"></i></a>
+                        <a href="#" class="text-gray-400 hover:text-white"><i class="fab fa-linkedin fa-lg"></i></a>
+                    </div>
+                </div>
+            </div>
+            <div class="border-t border-gray-700 pt-8 mt-12 flex flex-col md:flex-row justify-between items-center">
+                <p class="text-gray-400">© 2023 图库共享. 保留所有权利</p>
+                <div class="flex mt-4 md:mt-0 space-x-6">
+                    <a href="#" class="text-gray-400 hover:text-white">隐私政策</a>
+                    <a href="#" class="text-gray-400 hover:text-white">使用条款</a>
+                    <a href="#" class="text-gray-400 hover:text-white">Cookie 政策</a>
+                </div>
+            </div>
+        </div>
+    </footer>
+</body>
+</html>

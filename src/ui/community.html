@@ -1,0 +1,507 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>社区 - 图库共享</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body class="bg-gray-50 font-sans">
+    <!-- 导航栏 -->
+    <nav class="bg-white shadow-sm sticky top-0 z-50">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between h-16">
+                <div class="flex">
+                    <div class="flex-shrink-0 flex items-center">
+                        <a href="index.html">
+                            <span class="text-indigo-600 text-xl font-bold">图库共享</span>
+                        </a>
+                    </div>
+                    <div class="hidden sm:ml-6 sm:flex sm:space-x-8">
+                        <a href="index.html" class="border-transparent text-gray-500 hover:border-gray-300 hover:text-gray-700 inline-flex items-center px-1 pt-1 border-b-2 text-sm font-medium">首页</a>
+                        <a href="explore.html" class="border-transparent text-gray-500 hover:border-gray-300 hover:text-gray-700 inline-flex items-center px-1 pt-1 border-b-2 text-sm font-medium">探索</a>
+                        <a href="workspace.html" class="border-transparent text-gray-500 hover:border-gray-300 hover:text-gray-700 inline-flex items-center px-1 pt-1 border-b-2 text-sm font-medium">工作空间</a>
+                        <a href="community.html" class="border-indigo-500 text-gray-900 inline-flex items-center px-1 pt-1 border-b-2 text-sm font-medium">社区</a>
+                    </div>
+                </div>
+                <div class="hidden sm:ml-6 sm:flex sm:items-center">
+                    <!-- 搜索框 -->
+                    <div class="relative">
+                        <input type="text" placeholder="搜索素材..." class="bg-gray-100 rounded-full py-2 px-4 w-64 focus:outline-none focus:ring-2 focus:ring-indigo-500">
+                        <button class="absolute right-0 top-0 mt-2 mr-3 text-gray-400">
+                            <i class="fas fa-search"></i>
+                        </button>
+                    </div>
+                    
+                    <!-- 上传按钮 -->
+                    <a href="upload.html" class="ml-4 px-4 py-2 border border-transparent rounded-md shadow-sm text-sm font-medium text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500">
+                        上传素材
+                    </a>
+                    
+                    <!-- 用户菜单 -->
+                    <div class="ml-4 relative">
+                        <button class="rounded-full flex text-sm focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500">
+                            <img class="h-8 w-8 rounded-full" src="https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80" alt="用户头像">
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- 主要内容 -->
+    <main class="py-8">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <!-- 社区标题 -->
+            <div class="mb-8">
+                <h1 class="text-3xl font-bold text-gray-900">创作者社区</h1>
+                <p class="mt-2 text-gray-600">发现创意、分享灵感、参与讨论</p>
+            </div>
+            
+            <!-- 社区导航 -->
+            <div class="bg-white shadow rounded-lg mb-8">
+                <div class="flex overflow-x-auto">
+                    <button class="px-6 py-4 text-indigo-600 border-b-2 border-indigo-500 font-medium text-sm focus:outline-none whitespace-nowrap">
+                        热门动态
+                    </button>
+                    <button class="px-6 py-4 text-gray-500 font-medium text-sm hover:text-gray-700 focus:outline-none whitespace-nowrap">
+                        关注的人
+                    </button>
+                    <button class="px-6 py-4 text-gray-500 font-medium text-sm hover:text-gray-700 focus:outline-none whitespace-nowrap">
+                        推荐创作者
+                    </button>
+                    <button class="px-6 py-4 text-gray-500 font-medium text-sm hover:text-gray-700 focus:outline-none whitespace-nowrap">
+                        讨论区
+                    </button>
+                    <button class="px-6 py-4 text-gray-500 font-medium text-sm hover:text-gray-700 focus:outline-none whitespace-nowrap">
+                        教程分享
+                    </button>
+                    <button class="px-6 py-4 text-gray-500 font-medium text-sm hover:text-gray-700 focus:outline-none whitespace-nowrap">
+                        作品展示
+                    </button>
+                </div>
+            </div>
+            
+            <!-- 内容区域 -->
+            <div class="grid grid-cols-1 lg:grid-cols-3 gap-8">
+                <!-- 主要内容区 -->
+                <div class="lg:col-span-2 space-y-6">
+                    <!-- 分享动态框 -->
+                    <div class="bg-white p-6 rounded-lg shadow-sm">
+                        <div class="flex space-x-3 mb-4">
+                            <img class="h-10 w-10 rounded-full" src="https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80" alt="用户头像">
+                            <div class="flex-1">
+                                <textarea rows="2" class="shadow-sm block w-full focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm border border-gray-300 rounded-md" placeholder="分享你的创作心得..."></textarea>
+                                <div class="mt-3 flex justify-between">
+                                    <div class="flex space-x-3">
+                                        <button class="text-gray-500 hover:text-indigo-500 flex items-center">
+                                            <i class="fas fa-image mr-1"></i>
+                                            <span class="text-sm">图片</span>
+                                        </button>
+                                        <button class="text-gray-500 hover:text-indigo-500 flex items-center">
+                                            <i class="fas fa-link mr-1"></i>
+                                            <span class="text-sm">链接</span>
+                                        </button>
+                                        <button class="text-gray-500 hover:text-indigo-500 flex items-center">
+                                            <i class="fas fa-hashtag mr-1"></i>
+                                            <span class="text-sm">话题</span>
+                                        </button>
+                                    </div>
+                                    <button class="px-4 py-2 border border-transparent rounded-md shadow-sm text-sm font-medium text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500">
+                                        发布
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- 动态1：图片分享 -->
+                    <div class="bg-white rounded-lg shadow-sm overflow-hidden">
+                        <!-- 动态头部 -->
+                        <div class="p-4 flex items-center">
+                            <img class="h-10 w-10 rounded-full" src="https://images.unsplash.com/photo-1494790108377-be9c29b29330?ixlib=rb-1.2.1&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80" alt="用户头像">
+                            <div class="ml-3">
+                                <a href="#" class="text-sm font-medium text-gray-900 hover:underline">李华</a>
+                                <p class="text-xs text-gray-500">2小时前</p>
+                            </div>
+                            <button class="ml-auto text-gray-400 hover:text-gray-500">
+                                <i class="fas fa-ellipsis-h"></i>
+                            </button>
+                        </div>
+                        
+                        <!-- 动态内容 -->
+                        <div class="px-4 pb-2">
+                            <p class="text-sm text-gray-700">刚刚完成了一组建筑摄影作品，分享给大家。光线和角度是拍摄建筑的关键，尤其是玻璃幕墙建筑，需要找到合适的时间和位置。#建筑摄影 #摄影技巧</p>
+                        </div>
+                        
+                        <!-- 图片 -->
+                        <div class="grid grid-cols-2 gap-1">
+                            <img src="https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=80" alt="建筑照片" class="w-full h-48 object-cover">
+                            <img src="https://images.unsplash.com/photo-1512917774080-9991f1c4c750?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=80" alt="建筑照片" class="w-full h-48 object-cover">
+                            <img src="https://images.unsplash.com/photo-1554469384-e58fac16e23a?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=80" alt="建筑照片" class="w-full h-48 object-cover">
+                            <img src="https://images.unsplash.com/photo-1487958449943-2429e8be8625?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=80" alt="建筑照片" class="w-full h-48 object-cover">
+                        </div>
+                        
+                        <!-- 互动区域 -->
+                        <div class="p-4 border-t border-gray-200">
+                            <div class="flex justify-between text-sm text-gray-500">
+                                <div class="flex space-x-4">
+                                    <button class="flex items-center hover:text-indigo-600">
+                                        <i class="far fa-heart mr-1"></i>
+                                        <span>点赞 (24)</span>
+                                    </button>
+                                    <button class="flex items-center hover:text-indigo-600">
+                                        <i class="far fa-comment mr-1"></i>
+                                        <span>评论 (8)</span>
+                                    </button>
+                                </div>
+                                <button class="flex items-center hover:text-indigo-600">
+                                    <i class="far fa-bookmark mr-1"></i>
+                                    <span>收藏</span>
+                                </button>
+                            </div>
+                            
+                            <!-- 评论预览 -->
+                            <div class="mt-4 space-y-3">
+                                <div class="flex space-x-3">
+                                    <img class="h-8 w-8 rounded-full" src="https://images.unsplash.com/photo-1500648767791-00dcc994a43e?ixlib=rb-1.2.1&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80" alt="用户头像">
+                                    <div class="bg-gray-100 rounded-lg px-4 py-2 flex-1">
+                                        <div class="flex justify-between items-center">
+                                            <a href="#" class="font-medium text-gray-900 text-sm">张明</a>
+                                            <span class="text-xs text-gray-500">1小时前</span>
+                                        </div>
+                                        <p class="text-sm text-gray-700 mt-1">构图真的很棒，尤其是第三张照片的对角线透视效果，非常有冲击力！</p>
+                                    </div>
+                                </div>
+                                
+                                <div class="flex space-x-3">
+                                    <img class="h-8 w-8 rounded-full" src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?ixlib=rb-1.2.1&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80" alt="用户头像">
+                                    <div class="bg-gray-100 rounded-lg px-4 py-2 flex-1">
+                                        <div class="flex justify-between items-center">
+                                            <a href="#" class="font-medium text-gray-900 text-sm">陈小明</a>
+                                            <span class="text-xs text-gray-500">30分钟前</span>
+                                        </div>
+                                        <p class="text-sm text-gray-700 mt-1">能分享一下你使用的相机参数吗？想知道这种玻璃建筑的曝光设置。</p>
+                                    </div>
+                                </div>
+                                
+                                <button class="text-sm text-indigo-600 hover:text-indigo-800 font-medium">
+                                    查看全部8条评论
+                                </button>
+                                
+                                <!-- 评论输入框 -->
+                                <div class="flex space-x-3 mt-4">
+                                    <img class="h-8 w-8 rounded-full" src="https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80" alt="用户头像">
+                                    <div class="flex-1">
+                                        <input type="text" class="w-full border-gray-300 rounded-full text-sm focus:ring-indigo-500 focus:border-indigo-500" placeholder="写下你的评论...">
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- 动态2：教程分享 -->
+                    <div class="bg-white rounded-lg shadow-sm overflow-hidden">
+                        <!-- 动态头部 -->
+                        <div class="p-4 flex items-center">
+                            <img class="h-10 w-10 rounded-full" src="https://images.unsplash.com/photo-1438761681033-6461ffad8d80?ixlib=rb-1.2.1&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80" alt="用户头像">
+                            <div class="ml-3">
+                                <a href="#" class="text-sm font-medium text-gray-900 hover:underline">赵敏</a>
+                                <p class="text-xs text-gray-500">昨天</p>
+                            </div>
+                            <button class="ml-auto text-gray-400 hover:text-gray-500">
+                                <i class="fas fa-ellipsis-h"></i>
+                            </button>
+                        </div>
+                        
+                        <!-- 动态内容 -->
+                        <div class="px-4 pb-4">
+                            <p class="text-sm text-gray-700 mb-4">分享一个小教程：如何在Photoshop中快速抠出复杂背景中的人物头发。这是我最近用到的技巧，效果很好，特别是对于卷发。#PS教程 #设计技巧</p>
+                            
+                            <div class="bg-gray-100 rounded-lg p-4 border border-gray-200">
+                                <h3 class="text-base font-medium text-gray-900">Photoshop抠发丝教程</h3>
+                                <p class="text-sm text-gray-600 mt-1">3分钟快速学会专业抠图技巧，轻松处理复杂发丝</p>
+                                <img src="https://images.unsplash.com/photo-1611162617213-7d7a39e9b1d7?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=80" alt="教程封面" class="w-full h-48 object-cover rounded mt-2">
+                                <a href="#" class="mt-3 inline-flex items-center text-sm font-medium text-indigo-600 hover:text-indigo-800">
+                                    查看完整教程
+                                    <i class="fas fa-arrow-right ml-1"></i>
+                                </a>
+                            </div>
+                        </div>
+                        
+                        <!-- 互动区域 -->
+                        <div class="p-4 border-t border-gray-200">
+                            <div class="flex justify-between text-sm text-gray-500">
+                                <div class="flex space-x-4">
+                                    <button class="flex items-center hover:text-indigo-600">
+                                        <i class="far fa-heart mr-1"></i>
+                                        <span>点赞 (36)</span>
+                                    </button>
+                                    <button class="flex items-center hover:text-indigo-600">
+                                        <i class="far fa-comment mr-1"></i>
+                                        <span>评论 (12)</span>
+                                    </button>
+                                </div>
+                                <button class="flex items-center hover:text-indigo-600">
+                                    <i class="far fa-bookmark mr-1"></i>
+                                    <span>收藏</span>
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- 动态3：问题讨论 -->
+                    <div class="bg-white rounded-lg shadow-sm overflow-hidden">
+                        <!-- 动态头部 -->
+                        <div class="p-4 flex items-center">
+                            <img class="h-10 w-10 rounded-full" src="https://images.unsplash.com/photo-1599566150163-29194dcaad36?ixlib=rb-1.2.1&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80" alt="用户头像">
+                            <div class="ml-3">
+                                <a href="#" class="text-sm font-medium text-gray-900 hover:underline">王强</a>
+                                <p class="text-xs text-gray-500">3天前</p>
+                            </div>
+                            <button class="ml-auto text-gray-400 hover:text-gray-500">
+                                <i class="fas fa-ellipsis-h"></i>
+                            </button>
+                        </div>
+                        
+                        <!-- 动态内容 -->
+                        <div class="px-4 pb-4">
+                            <p class="text-sm text-gray-700">大家有推荐的免版税图库网站吗？我正在做一个商业项目，需要一些高质量的商务场景图片，预算有限。#图库推荐 #设计资源</p>
+                        </div>
+                        
+                        <!-- 互动区域 -->
+                        <div class="p-4 border-t border-gray-200">
+                            <div class="flex justify-between text-sm text-gray-500">
+                                <div class="flex space-x-4">
+                                    <button class="flex items-center hover:text-indigo-600">
+                                        <i class="far fa-heart mr-1"></i>
+                                        <span>点赞 (15)</span>
+                                    </button>
+                                    <button class="flex items-center hover:text-indigo-600">
+                                        <i class="far fa-comment mr-1"></i>
+                                        <span>评论 (20)</span>
+                                    </button>
+                                </div>
+                                <button class="flex items-center hover:text-indigo-600">
+                                    <i class="far fa-bookmark mr-1"></i>
+                                    <span>收藏</span>
+                                </button>
+                            </div>
+                            
+                            <!-- 评论预览 -->
+                            <div class="mt-4 space-y-3">
+                                <div class="flex space-x-3">
+                                    <img class="h-8 w-8 rounded-full" src="https://images.unsplash.com/photo-1534528741775-53994a69daeb?ixlib=rb-1.2.1&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80" alt="用户头像">
+                                    <div class="bg-gray-100 rounded-lg px-4 py-2 flex-1">
+                                        <div class="flex justify-between items-center">
+                                            <a href="#" class="font-medium text-gray-900 text-sm">周晓</a>
+                                            <span class="text-xs text-gray-500">3天前</span>
+                                        </div>
+                                        <p class="text-sm text-gray-700 mt-1">推荐Unsplash，完全免费，而且质量很高。我所有项目都在用。</p>
+                                    </div>
+                                </div>
+                                
+                                <div class="flex space-x-3">
+                                    <img class="h-8 w-8 rounded-full" src="https://images.unsplash.com/photo-1501196354995-cbb51c65aaea?ixlib=rb-1.2.1&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80" alt="用户头像">
+                                    <div class="bg-gray-100 rounded-lg px-4 py-2 flex-1">
+                                        <div class="flex justify-between items-center">
+                                            <a href="#" class="font-medium text-gray-900 text-sm">刘伟</a>
+                                            <span class="text-xs text-gray-500">2天前</span>
+                                        </div>
+                                        <p class="text-sm text-gray-700 mt-1">如果有预算的话，Shutterstock性价比还不错，他们经常有优惠活动。对了，Pexels也是一个不错的免费选择。</p>
+                                    </div>
+                                </div>
+                                
+                                <button class="text-sm text-indigo-600 hover:text-indigo-800 font-medium">
+                                    查看全部20条评论
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- 加载更多按钮 -->
+                    <div class="text-center py-4">
+                        <button class="px-4 py-2 border border-gray-300 rounded-md shadow-sm text-sm font-medium text-gray-700 bg-white hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500">
+                            加载更多
+                        </button>
+                    </div>
+                </div>
+                
+                <!-- 侧边栏 -->
+                <div class="space-y-6">
+                    <!-- 热门话题 -->
+                    <div class="bg-white rounded-lg shadow-sm p-6">
+                        <h3 class="text-lg font-medium text-gray-900 mb-4">热门话题</h3>
+                        <div class="space-y-3">
+                            <a href="#" class="block hover:bg-gray-50 p-2 rounded-md transition-colors duration-200">
+                                <div class="flex items-center justify-between">
+                                    <span class="text-indigo-600 font-medium">#摄影技巧</span>
+                                    <span class="text-xs text-gray-500">532篇内容</span>
+                                </div>
+                            </a>
+                            <a href="#" class="block hover:bg-gray-50 p-2 rounded-md transition-colors duration-200">
+                                <div class="flex items-center justify-between">
+                                    <span class="text-indigo-600 font-medium">#设计灵感</span>
+                                    <span class="text-xs text-gray-500">423篇内容</span>
+                                </div>
+                            </a>
+                            <a href="#" class="block hover:bg-gray-50 p-2 rounded-md transition-colors duration-200">
+                                <div class="flex items-center justify-between">
+                                    <span class="text-indigo-600 font-medium">#PS教程</span>
+                                    <span class="text-xs text-gray-500">315篇内容</span>
+                                </div>
+                            </a>
+                            <a href="#" class="block hover:bg-gray-50 p-2 rounded-md transition-colors duration-200">
+                                <div class="flex items-center justify-between">
+                                    <span class="text-indigo-600 font-medium">#图库推荐</span>
+                                    <span class="text-xs text-gray-500">264篇内容</span>
+                                </div>
+                            </a>
+                            <a href="#" class="block hover:bg-gray-50 p-2 rounded-md transition-colors duration-200">
+                                <div class="flex items-center justify-between">
+                                    <span class="text-indigo-600 font-medium">#建筑摄影</span>
+                                    <span class="text-xs text-gray-500">198篇内容</span>
+                                </div>
+                            </a>
+                        </div>
+                        <div class="mt-4 text-center">
+                            <a href="#" class="text-sm text-indigo-600 hover:text-indigo-800 font-medium">
+                                查看全部话题
+                            </a>
+                        </div>
+                    </div>
+                    
+                    <!-- 推荐关注 -->
+                    <div class="bg-white rounded-lg shadow-sm p-6">
+                        <h3 class="text-lg font-medium text-gray-900 mb-4">推荐关注</h3>
+                        <div class="space-y-4">
+                            <div class="flex items-center justify-between">
+                                <div class="flex items-center">
+                                    <img class="h-10 w-10 rounded-full" src="https://images.unsplash.com/photo-1500648767791-00dcc994a43e?ixlib=rb-1.2.1&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80" alt="用户头像">
+                                    <div class="ml-3">
+                                        <a href="#" class="text-sm font-medium text-gray-900 hover:underline">张明</a>
+                                        <p class="text-xs text-gray-500">风光摄影师</p>
+                                    </div>
+                                </div>
+                                <button class="text-xs text-indigo-600 hover:text-indigo-800 font-medium border border-indigo-600 rounded-full px-3 py-1">
+                                    关注
+                                </button>
+                            </div>
+                            <div class="flex items-center justify-between">
+                                <div class="flex items-center">
+                                    <img class="h-10 w-10 rounded-full" src="https://images.unsplash.com/photo-1494790108377-be9c29b29330?ixlib=rb-1.2.1&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80" alt="用户头像">
+                                    <div class="ml-3">
+                                        <a href="#" class="text-sm font-medium text-gray-900 hover:underline">李华</a>
+                                        <p class="text-xs text-gray-500">建筑摄影师</p>
+                                    </div>
+                                </div>
+                                <button class="text-xs text-indigo-600 hover:text-indigo-800 font-medium border border-indigo-600 rounded-full px-3 py-1">
+                                    关注
+                                </button>
+                            </div>
+                            <div class="flex items-center justify-between">
+                                <div class="flex items-center">
+                                    <img class="h-10 w-10 rounded-full" src="https://images.unsplash.com/photo-1520785643438-5bf77931f493?ixlib=rb-1.2.1&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80" alt="用户头像">
+                                    <div class="ml-3">
+                                        <a href="#" class="text-sm font-medium text-gray-900 hover:underline">林小红</a>
+                                        <p class="text-xs text-gray-500">设计师</p>
+                                    </div>
+                                </div>
+                                <button class="text-xs text-indigo-600 hover:text-indigo-800 font-medium border border-indigo-600 rounded-full px-3 py-1">
+                                    关注
+                                </button>
+                            </div>
+                        </div>
+                        <div class="mt-4 text-center">
+                            <a href="#" class="text-sm text-indigo-600 hover:text-indigo-800 font-medium">
+                                查看更多推荐
+                            </a>
+                        </div>
+                    </div>
+                    
+                    <!-- 社区活动 -->
+                    <div class="bg-white rounded-lg shadow-sm p-6">
+                        <h3 class="text-lg font-medium text-gray-900 mb-4">社区活动</h3>
+                        <div class="space-y-4">
+                            <div class="border border-gray-200 rounded-lg p-4">
+                                <span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-green-100 text-green-800">
+                                    进行中
+                                </span>
+                                <h4 class="text-base font-medium text-gray-900 mt-2">2023夏季创意摄影大赛</h4>
+                                <p class="text-sm text-gray-600 mt-1">以"城市之光"为主题，展示城市魅力</p>
+                                <div class="mt-3 flex justify-between items-center">
+                                    <span class="text-xs text-gray-500">截止：7月31日</span>
+                                    <a href="#" class="text-xs text-indigo-600 hover:text-indigo-800 font-medium">
+                                        参与活动
+                                    </a>
+                                </div>
+                            </div>
+                            <div class="border border-gray-200 rounded-lg p-4">
+                                <span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-yellow-100 text-yellow-800">
+                                    即将开始
+                                </span>
+                                <h4 class="text-base font-medium text-gray-900 mt-2">PS技巧在线分享会</h4>
+                                <p class="text-sm text-gray-600 mt-1">资深修图师分享专业修图技巧</p>
+                                <div class="mt-3 flex justify-between items-center">
+                                    <span class="text-xs text-gray-500">时间：8月5日 19:00</span>
+                                    <a href="#" class="text-xs text-indigo-600 hover:text-indigo-800 font-medium">
+                                        预约提醒
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <!-- 页脚 -->
+    <footer class="bg-gray-800 text-white mt-12">
+        <div class="max-w-7xl mx-auto px-4 py-12 sm:px-6 lg:px-8">
+            <div class="grid grid-cols-1 md:grid-cols-4 gap-8">
+                <div>
+                    <h3 class="text-lg font-semibold mb-4">图库共享</h3>
+                    <p class="text-gray-400">智能协同图片素材网，为创作者提供完美的协作平台。</p>
+                </div>
+                <div>
+                    <h3 class="text-lg font-semibold mb-4">快速链接</h3>
+                    <ul class="space-y-2">
+                        <li><a href="index.html" class="text-gray-400 hover:text-white">首页</a></li>
+                        <li><a href="explore.html" class="text-gray-400 hover:text-white">探索</a></li>
+                        <li><a href="workspace.html" class="text-gray-400 hover:text-white">工作空间</a></li>
+                        <li><a href="community.html" class="text-gray-400 hover:text-white">社区</a></li>
+                    </ul>
+                </div>
+                <div>
+                    <h3 class="text-lg font-semibold mb-4">关于我们</h3>
+                    <ul class="space-y-2">
+                        <li><a href="#" class="text-gray-400 hover:text-white">公司简介</a></li>
+                        <li><a href="#" class="text-gray-400 hover:text-white">联系我们</a></li>
+                        <li><a href="#" class="text-gray-400 hover:text-white">加入我们</a></li>
+                        <li><a href="#" class="text-gray-400 hover:text-white">帮助中心</a></li>
+                    </ul>
+                </div>
+                <div>
+                    <h3 class="text-lg font-semibold mb-4">关注我们</h3>
+                    <div class="flex space-x-4">
+                        <a href="#" class="text-gray-400 hover:text-white"><i class="fab fa-weixin fa-lg"></i></a>
+                        <a href="#" class="text-gray-400 hover:text-white"><i class="fab fa-weibo fa-lg"></i></a>
+                        <a href="#" class="text-gray-400 hover:text-white"><i class="fab fa-github fa-lg"></i></a>
+                        <a href="#" class="text-gray-400 hover:text-white"><i class="fab fa-linkedin fa-lg"></i></a>
+                    </div>
+                </div>
+            </div>
+            <div class="border-t border-gray-700 pt-8 mt-12 flex flex-col md:flex-row justify-between items-center">
+                <p class="text-gray-400">© 2023 图库共享. 保留所有权利</p>
+                <div class="flex mt-4 md:mt-0 space-x-6">
+                    <a href="#" class="text-gray-400 hover:text-white">隐私政策</a>
+                    <a href="#" class="text-gray-400 hover:text-white">使用条款</a>
+                    <a href="#" class="text-gray-400 hover:text-white">Cookie 政策</a>
+                </div>
+            </div>
+        </div>
+    </footer>
+</body>
+</html>
