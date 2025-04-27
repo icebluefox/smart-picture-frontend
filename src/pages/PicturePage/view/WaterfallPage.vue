@@ -9,19 +9,16 @@
         </h1>
 
         <!-- 搜索框区域 -->
-        <div class="bg-white/10 backdrop-blur-md rounded-lg shadow-xl max-w-3xl mx-auto overflow-hidden p-4">
+        <div class="bg-white/10 backdrop-blur-md rounded-lg shadow-xl max-w-3xl mx-auto overflow-visible p-4">
           <div class="flex gap-2">
-            <!-- 分类下拉框 -->
+            <!-- 自定义分类下拉框 -->
             <div class="w-1/3">
-              <select
-                  v-model="selectedCategory"
-                  class="w-full h-12 rounded-md text-lg border-0 shadow-md focus:outline-none focus:ring-2 focus:ring-indigo-500 px-4 bg-white text-gray-700"
-              >
-                <option value="">所有分类</option>
-                <option v-for="category in categories" :key="category" :value="category">
-                  {{ category }}
-                </option>
-              </select>
+              <CustomSelect 
+                v-model="selectedCategory" 
+                :options="categoryOptions" 
+                placeholder="选择分类" 
+                title="分类"
+              />
             </div>
 
             <!-- 多标签搜索框 -->
@@ -74,22 +71,22 @@
               </div>
             </div>
           </div>
-        </div>
-
-        <!-- 热门标签 -->
-        <div class="mt-6 text-center">
-          <p class="text-white/80 text-sm mb-2">热门标签</p>
-          <div class="flex flex-wrap justify-center gap-3">
-            <button
-                v-for="tag in tags"
-                :key="tag"
-                class="px-4 py-2 rounded-md border border-white/40 text-white hover:bg-white/20 transition-all duration-200"
-                :class="{'opacity-50 cursor-not-allowed': selectedTags.length >= maxTagCount && !selectedTags.includes(tag)}"
-                @click="handleTagClick(tag)"
-                :disabled="selectedTags.length >= maxTagCount && !selectedTags.includes(tag)"
-            >
-              {{ tag }}
-            </button>
+          
+          <!-- 热门标签 -->
+          <div class="mt-6 text-center">
+            <p class="text-white/80 text-sm mb-2">热门标签</p>
+            <div class="flex flex-wrap justify-center gap-3">
+              <button
+                  v-for="tag in tags"
+                  :key="tag"
+                  class="px-4 py-2 rounded-md bg-white/10 text-white hover:bg-white/20 transition-all duration-200"
+                  :class="{'opacity-50 cursor-not-allowed': selectedTags.length >= maxTagCount && !selectedTags.includes(tag)}"
+                  @click="handleTagClick(tag)"
+                  :disabled="selectedTags.length >= maxTagCount && !selectedTags.includes(tag)"
+              >
+                {{ tag }}
+              </button>
+            </div>
           </div>
         </div>
       </div>
@@ -97,6 +94,20 @@
 
     <!-- 图片瀑布流区域 -->
     <div class="max-w-[2000px] mx-auto px-2 py-8">
+      <!-- 添加上传图片按钮 -->
+      <div class="flex justify-between items-center mb-4">
+        <div class="text-lg font-semibold text-gray-700">免费素材图片</div>
+        <router-link 
+          to="/picture/upload" 
+          class="inline-flex items-center px-4 py-2 border border-transparent text-sm font-medium rounded-md shadow-sm text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 transition-colors duration-300"
+        >
+          <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 mr-1.5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-8l-4-4m0 0L8 8m4-4v12" />
+          </svg>
+          上传图片
+        </router-link>
+      </div>
+
       <div v-if="loading" class="flex justify-center items-center py-12">
         <div class="animate-spin rounded-full h-12 w-12 border-4 border-indigo-500 border-t-transparent"></div>
       </div>
@@ -120,8 +131,9 @@
 </template>
 
 <script setup lang="ts">
-import {ref, onMounted, watch} from 'vue'
+import {ref, onMounted, watch, onUnmounted, computed} from 'vue'
 import MasonryColumn from '../components/MasonryColumn.vue'
+import CustomSelect from '@/components/CustomSelect.vue'
 import {PicturePagePictureVo, picturePageQueryRequestByPost, WaterfallQueryRequest} from "../../../api/picture-service";
 import {message} from "../../../plugins/message";
 import {downloadImage} from "../../../utils";
@@ -142,6 +154,15 @@ const loadedImageIds = new Set<number>() // 用于追踪已加载的图片ID
 
 const categories = ['自然风光', '城市建筑', '人物肖像', '动物世界', '美食佳肴', '旅行探险', '科技数码', '艺术设计', '体育运动']
 const tags = ['风景', '人像', '建筑', '旅行', '美食', '动物', '植物', '城市', '黑白', '夜景', '山水', '海洋', '街头', '创意', '复古']
+
+// 为 CustomSelect 准备 options
+const categoryOptions = computed(() => {
+  return [
+    { value: '', label: '所有分类' }, // 添加 "所有分类" 选项
+    ...categories.map(cat => ({ value: cat, label: cat })) // 转换原始分类数组
+  ];
+});
+
 // 搜索条件构建
 const searchParam = ref<WaterfallQueryRequest>({
   searchText: searchQuery.value,
@@ -206,16 +227,16 @@ const handleLoadMore = async () => {
 const mockLoadImages = async () => {
   try {
     const res = await picturePageQueryRequestByPost(searchParam.value)
-    if (res.code !== 200) {
-      message.error(res.message, res.description)
+    if ((res as any).code !== 200) {
+      message.error((res as any).message, (res as any).description)
       return
     }
 
     // 过滤掉重复的图片
-    const newImages = res.data.data.filter(img => !loadedImageIds.has(img.id))
+    const newImages = res.data.data.filter(img => !loadedImageIds.has(Number(img.id)))
 
     // 更新已加载图片ID集合
-    newImages.forEach(img => loadedImageIds.add(img.id))
+    newImages.forEach(img => loadedImageIds.add(Number(img.id)))
 
     if (searchParam.value.pageNum === 1) {
       images.value = newImages
@@ -237,7 +258,7 @@ const mockLoadImages = async () => {
 }
 
 // 监听搜索条件变化
-watch([searchQuery, selectedCategory, selectedTags], () => {
+watch([searchQuery, selectedCategory, () => [...selectedTags.value]], () => {
   resetSearchParam()
 }, {deep: true})
 
@@ -313,7 +334,8 @@ onMounted(async () => {
 
 .search-section {
   position: relative;
-  overflow: hidden;
+  overflow: visible !important;
+  z-index: 10;
 }
 
 .search-section::before {
@@ -324,6 +346,6 @@ onMounted(async () => {
   right: 0;
   bottom: 0;
   background: radial-gradient(circle at center, rgba(0, 0, 0, 0) 0%, rgba(0, 0, 0, 0.3) 100%);
-  z-index: 1;
+  z-index: -1;
 }
 </style>

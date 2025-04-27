@@ -27,6 +27,14 @@ export const mainRoutes = [
                 path: 'detail/:id',
                 name: '图片详情',
                 component: PictureDetailPage
+            },
+            {
+                path: 'upload',
+                name: '上传图片',
+                component: () => import('../pages/PicturePage/view/PictureUploadPage.vue'),
+                meta:{
+                    requireLogin:true
+                }
             }
         ]
     },

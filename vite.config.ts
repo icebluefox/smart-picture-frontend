@@ -5,6 +5,7 @@ import tailwindcss from '@tailwindcss/vite'
 import { fileURLToPath } from 'url'
 
 // https://vite.dev/config/
+
 export default defineConfig({
   plugins: [vue(), tailwindcss()],
   resolve: {
@@ -39,7 +40,10 @@ export default defineConfig({
           if (id.includes('node_modules')) {
             return 'vendor';
           }
-        }
+        },
+        assetFileNames: 'assets/[name]-[hash][extname]',
+        entryFileNames: 'assets/[name]-[hash].js',
+        chunkFileNames: 'assets/[name]-[hash].js'
       }
     }
   },

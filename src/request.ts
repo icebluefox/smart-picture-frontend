@@ -1,6 +1,11 @@
 // @ts-ignore
 import axios from 'axios'
 
+const server = {
+    huawei:'https://collab-vision.yrforest.top/api',
+    local:'http://localhost:8088'
+}
+
 export interface ResponseResult<T = unknown> {
     message: string;
     description: string,
@@ -10,7 +15,7 @@ export interface ResponseResult<T = unknown> {
 
 // 创建 Axios 实例
 const myAxios = axios.create({
-    baseURL: 'http://1.95.210.136:8088',
+    baseURL: server.huawei,
     timeout: 60000,
     withCredentials: true,
 })

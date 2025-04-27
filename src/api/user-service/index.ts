@@ -10,6 +10,12 @@ export interface UserRegisterRequest {
     username: string
     password: string
     checkPassword: string
+    emailCode: string
+}
+
+export interface SendEmailRequest{
+    email: string
+    emailType:number
 }
 
 export interface UserVo {
@@ -20,7 +26,6 @@ export interface UserVo {
     avatar: string,
     role: string
 }
-
 
 export const userLoginRequestByPost = (userLoginRequest: UserLoginRequest) => {
     return myAxios.request<UserVo>({
@@ -51,4 +56,12 @@ export const logoutUserRequestByPost = () => {
         url: "/auth/logout"
     })
 
+}
+
+export const sendEmailCodeRequestByPost = (sendEmailRequest: SendEmailRequest) => {
+    return myAxios.request({
+        method: "POST",
+        url: "/auth/email",
+        data: sendEmailRequest
+    })
 }

@@ -4,10 +4,25 @@
       <!-- 图片区域 -->
       <div class="bg-white shadow rounded-lg overflow-hidden mb-8 picture-area">
         <div class="relative image-container">
+          <!-- 骨架屏 - 在图片加载前显示 -->
+          <div v-if="loading" class="w-full h-full flex items-center justify-center bg-gray-100 animate-pulse">
+            <div class="w-full h-full flex flex-col items-center justify-center">
+              <div class="w-full h-full flex items-center justify-center">
+                <svg class="w-12 h-12 text-gray-300" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1" d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z" />
+                </svg>
+              </div>
+              <div class="w-3/4 h-4 bg-gray-300 rounded-md mt-4"></div>
+              <div class="w-1/2 h-4 bg-gray-300 rounded-md mt-2"></div>
+            </div>
+          </div>
+          
           <!-- 图片 -->
-          <img :src="pictureDetail.compressUrl??pictureDetail.url"
+          <img v-else 
+               :src="pictureDetail.compressUrl??pictureDetail.url"
                alt="城市建筑"
-               class="w-full h-auto object-cover">
+               class="w-full h-auto object-cover"
+               @load="imageLoaded">
         </div>
 
         <!-- 图片信息 -->
@@ -225,6 +240,7 @@ import {message} from "../../../plugins/message";
 import router from "../../../router";
 
 const route = useRoute()
+const loading = ref(true);
 
 const pictureDetail = ref<PictureDetailVo>({
   id: 0,
@@ -278,17 +294,40 @@ const download = ()=>{
   message.success("下载成功", "")
 }
 
+// 图片加载完成处理函数
+const imageLoaded = () => {
+  loading.value = false;
+};
+
 const getPictureDetail = async (id: string) => {
-  const res = await pictureDetailQueryRequestByGet(id)
-  if (res.code != 200) {
+  loading.value = true;
+  try {
+    const res = await pictureDetailQueryRequestByGet(id)
+    if (res.code != 200) {
+      router.push({
+        path:"/notFound"
+      })
+      return;
+    }
+    
+    pictureDetail.value = {
+      ...res.data
+    }
+    
+    // 如果图片已经在缓存中，可能不会触发@load事件，所以这里预加载一个图片来处理这种情况
+    const img = new Image();
+    img.onload = () => {
+      loading.value = false;
+    };
+    img.onerror = () => {
+      loading.value = false; // 即使加载失败也要移除骨架屏
+    };
+    img.src = pictureDetail.value.compressUrl || pictureDetail.value.url;
+  } catch (error) {
+    loading.value = false;
     router.push({
       path:"/notFound"
-    })
-
-  }
-  
-  pictureDetail.value = {
-    ...res.data
+    });
   }
 }
 
@@ -318,5 +357,19 @@ onMounted(async () => {
   height: 100%;
   object-fit: cover;
   display: block;
+}
+
+/* 骨架屏动画 */
+@keyframes pulse {
+  0%, 100% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0.6;
+  }
+}
+
+.animate-pulse {
+  animation: pulse 1.5s cubic-bezier(0.4, 0, 0.6, 1) infinite;
 }
 </style>

@@ -1,5 +1,6 @@
 import {PageQueryRequest, PageQueryResult} from "../service";
 import myAxios from "../../request";
+import {UserVo} from "@/api/user-service";
 
 
 export interface WaterfallQueryRequest extends PageQueryRequest {
@@ -126,6 +127,41 @@ export interface PictureDetailVo {
     avatar: string
 }
 
+export interface PictureUploadRequest {
+    id?: number;      // 图片ID（用于修改）
+    spaceId?: number; // 空间ID（不传默认公共图库）
+    url?: string;     // 图片URL（URL方式上传必传）
+    picName?: string; // 图片名称
+    category?: string;// 图片类别
+    tags?: string[];  // 图片标签
+    introduction?: string; // 图片简介
+}
+
+
+
+// 完整图片信息结构（更新核心部分）
+interface PictureVo {
+    id: number;                  // 图片ID
+    url: string;                 // 原图URL
+    compressUrl: string;         // 压缩图URL
+    thumbnailUrl: string;        // 缩略图URL
+    picName: string;             // 图片名称
+    introduction: string;        // 图片简介
+    tags: string[];              // 标签数组
+    category: string;            // 图片分类
+    picSize: number;             // 文件体积（单位：字节）
+    picWidth: number;            // 图片宽度（像素）
+    picHeight: number;           // 图片高度（像素）
+    picScale: number;            // 宽高比例
+    picFormat: string;           // 格式（如 JPEG/PNG）
+    picColor?: string;           // 主色调（可选，如 "#FF0000"）
+    userId: number;              // 上传者ID
+    createTime: string;          // 创建时间（ISO 8601 格式）
+    editTime: string;            // 最后编辑时间
+    updateTime: string;          // 最后更新时间
+    user: UserVo;           // 上传者详细信息
+}
+
 export const picturePageQueryRequestByPost = (picturePageQueryRequest: WaterfallQueryRequest) => {
     return myAxios.request<PageQueryResult<PicturePagePictureVo>>({
         method: "POST",
@@ -136,7 +172,44 @@ export const picturePageQueryRequestByPost = (picturePageQueryRequest: Waterfall
 
 export const pictureDetailQueryRequestByGet = (id: string) => {
     return myAxios.request<PictureDetailVo>({
-        method:"GET",
-        url:`/picture/search/detail/${id}`
+        method: "GET",
+        url: `/picture/search/detail/${id}`
     })
+}
+
+export const pictureUploadRequestByPost = (file:File, pictureUploadRequest:PictureUploadRequest) => {
+    const formData = new FormData();
+    formData.append('file', file);
+    
+    // 添加图片信息
+    if (pictureUploadRequest.picName) {
+        formData.append('picName', pictureUploadRequest.picName);
+    }
+    
+    if (pictureUploadRequest.category) {
+        formData.append('category', pictureUploadRequest.category);
+    }
+
+    if (pictureUploadRequest.tags && pictureUploadRequest.tags.length > 0) {
+        pictureUploadRequest.tags.forEach(tag => {
+            formData.append('tags', tag);  // 每个 tag 单独追加
+        });
+    }
+    
+    if (pictureUploadRequest.introduction) {
+        formData.append('introduction', pictureUploadRequest.introduction);
+    }
+    
+    if (pictureUploadRequest.spaceId) {
+        formData.append('spaceId', pictureUploadRequest.spaceId.toString());
+    }
+    
+    return myAxios.request({
+        method: "POST",
+        url: "/picture/upload",
+        data: formData,
+        headers: {
+            'Content-Type': 'multipart/form-data'
+        }
+    });
 }

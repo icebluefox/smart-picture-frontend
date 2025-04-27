@@ -157,12 +157,13 @@
 <script setup lang="ts">
 import {onMounted, ref} from "vue";
 import {UserLoginRequest, userLoginRequestByPost} from "../../api/user-service";
-import {useRouter} from "vue-router";
+import {useRouter, useRoute} from "vue-router";
 import {useUserStore} from "../../stores/useUserStore";
 import {message} from "../../plugins/message";
 
 // 变量
 const router = useRouter()
+const route = useRoute()
 const userStore = useUserStore()
 const loading = ref(false)
 const loginFormData = ref<UserLoginRequest>({
@@ -172,7 +173,11 @@ const loginFormData = ref<UserLoginRequest>({
 const showPassword = ref(false);
 
 onMounted(() => {
-
+  // 如果已登录，重定向到首页或来源页面
+  if (userStore.isLogin()) {
+    const redirectPath = route.query.redirect as string;
+    router.replace(redirectPath || '/');
+  }
 })
 
 // 方法
@@ -217,9 +222,10 @@ const doLogin = async () => {
   } else {
     // 登录成功
     userStore.setLoginUser(res.data)
-    router.replace({
-      path: "/"
-    })
+    
+    // 检查是否有重定向参数，有则跳转到该页面，否则跳转到首页
+    const redirectPath = route.query.redirect as string;
+    router.replace(redirectPath || '/');
   }
 
   loading.value = false

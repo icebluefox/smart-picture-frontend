@@ -76,6 +76,34 @@
             </div>
           </div>
 
+          <!-- 邮箱验证码 -->
+          <div>
+            <div class="relative flex">
+              <div class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
+                <svg class="h-5 w-5 text-gray-400" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20"
+                     fill="currentColor">
+                  <path fill-rule="evenodd" d="M4 4a2 2 0 00-2 2v8a2 2 0 002 2h12a2 2 0 002-2V6a2 2 0 00-2-2H4zm0 2h12v4H4V6z" clip-rule="evenodd"/>
+                </svg>
+              </div>
+              <input
+                  type="text"
+                  id="emailCode"
+                  name="emailCode"
+                  v-model="registerFormData.emailCode"
+                  placeholder="请输入邮箱验证码"
+                  class="block w-full pl-10 py-2.5 border border-gray-200 rounded-lg focus:ring-0 focus:border-indigo-600 transition-colors bg-white/80"
+              />
+              <button
+                  type="button"
+                  @click="sendEmailCode"
+                  :disabled="countdown > 0"
+                  class="ml-2 px-4 py-2.5 border border-transparent rounded-lg text-sm font-medium text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 disabled:opacity-50 disabled:cursor-not-allowed transition-colors whitespace-nowrap"
+              >
+                {{ countdown > 0 ? `${countdown}s后重试` : '发送验证码' }}
+              </button>
+            </div>
+          </div>
+
           <!-- 密码和确认密码在同一行 -->
           <div class="grid grid-cols-2 gap-3">
             <!-- 密码 -->
@@ -153,30 +181,6 @@
             </div>
           </div>
 
-          <!-- 用户类型 -->
-          <div>
-            <div class="grid grid-cols-3 gap-2">
-              <label
-                  class="flex items-center bg-gray-50 rounded-lg px-3 py-1.5 cursor-pointer hover:bg-indigo-50 transition-colors border border-gray-200">
-                <input type="radio" name="user-type" value="designer"
-                       class="h-4 w-4 text-indigo-600 focus:ring-indigo-500 border-gray-300 mr-2">
-                <span class="text-sm">设计师</span>
-              </label>
-              <label
-                  class="flex items-center bg-gray-50 rounded-lg px-3 py-1.5 cursor-pointer hover:bg-indigo-50 transition-colors border border-gray-200">
-                <input type="radio" name="user-type" value="photographer"
-                       class="h-4 w-4 text-indigo-600 focus:ring-indigo-500 border-gray-300 mr-2">
-                <span class="text-sm">摄影师</span>
-              </label>
-              <label
-                  class="flex items-center bg-gray-50 rounded-lg px-3 py-1.5 cursor-pointer hover:bg-indigo-50 transition-colors border border-gray-200">
-                <input type="radio" name="user-type" value="other"
-                       class="h-4 w-4 text-indigo-600 focus:ring-indigo-500 border-gray-300 mr-2">
-                <span class="text-sm">其他</span>
-              </label>
-            </div>
-          </div>
-
           <!-- 同意条款 -->
           <div class="flex items-center">
             <input id="terms" name="terms" type="checkbox"
@@ -237,8 +241,8 @@
 
 <script setup lang="ts">
 import { ref } from 'vue';
-import type { UserRegisterRequest } from "../../api/user-service";
-import { userRegisterRequestByPost } from "../../api/user-service";
+import type {SendEmailRequest, UserRegisterRequest} from "../../api/user-service";
+import { userRegisterRequestByPost, sendEmailCodeRequestByPost } from "../../api/user-service";
 import { message } from "../../plugins/message";
 import { useRouter } from "vue-router";
 
@@ -246,11 +250,13 @@ import { useRouter } from "vue-router";
 const router = useRouter();
 const showPassword = ref(false);
 const showConfirmPassword = ref(false);
+const countdown = ref(0);
 const registerFormData = ref<UserRegisterRequest>({
   email: "",
   username: "",
   password: "",
-  checkPassword: ""
+  checkPassword: "",
+  emailCode: ""
 });
 
 // 方法
@@ -260,6 +266,40 @@ const togglePassword = () => {
 
 const toggleConfirmPassword = () => {
   showConfirmPassword.value = !showConfirmPassword.value;
+};
+
+// 发送邮箱验证码
+const sendEmailCode = async () => {
+  if (!registerFormData.value.email) {
+    message.error("发送失败", "请输入邮箱地址");
+    return;
+  }
+
+  // 邮箱格式验证
+  const emailRegex = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
+  if (!emailRegex.test(registerFormData.value.email)) {
+    message.error("发送失败", "请输入正确的邮箱格式");
+    return;
+  }
+  
+  try {
+    const sendEmailRequest = {
+      email:registerFormData.value.email,
+      emailType:1
+    } as SendEmailRequest
+    await sendEmailCodeRequestByPost(sendEmailRequest);
+    message.success("发送成功", "验证码已发送到您的邮箱");
+    // 开始倒计时
+    countdown.value = 60;
+    const timer = setInterval(() => {
+      countdown.value--;
+      if (countdown.value <= 0) {
+        clearInterval(timer);
+      }
+    }, 1000);
+  } catch (error) {
+    message.error("发送失败", error instanceof Error ? error.message : "请稍后重试");
+  }
 };
 
 const doRegister = async () => {

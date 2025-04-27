@@ -4,7 +4,7 @@
       <div class="max-w-7xl mx-auto px-4 py-12 sm:px-6 lg:px-8">
         <div class="grid grid-cols-1 md:grid-cols-4 gap-8">
           <div>
-            <h3 class="text-lg font-semibold mb-4">图库共享</h3>
+            <h3 class="text-lg font-semibold mb-4">{{constant.information.chineseName}}</h3>
             <p class="text-gray-400">{{constant.footer.slogan}}</p>
           </div>
           <div>
