@@ -108,10 +108,31 @@
         </router-link>
       </div>
 
+      <!-- 加载提示 -->
       <div v-if="loading" class="flex justify-center items-center py-12">
         <div class="animate-spin rounded-full h-12 w-12 border-4 border-indigo-500 border-t-transparent"></div>
       </div>
 
+      <!-- 错误提示和重试按钮 -->
+      <div v-else-if="requestPaused && errorMessage" class="flex flex-col items-center justify-center py-12">
+        <div class="text-red-500 mb-4">
+          <svg xmlns="http://www.w3.org/2000/svg" class="h-12 w-12 mx-auto" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z" />
+          </svg>
+          <p class="text-center mt-2">{{ errorMessage }}</p>
+        </div>
+        <button 
+          @click="retryLoadImages" 
+          class="inline-flex items-center px-4 py-2 border border-transparent text-sm font-medium rounded-md shadow-sm text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 transition-colors duration-300"
+        >
+          <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 mr-1.5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15" />
+          </svg>
+          重新加载
+        </button>
+      </div>
+
+      <!-- 图片列表 -->
       <div v-else class="masonry-grid">
         <MasonryColumn
             v-for="columnIndex in columnCount"
@@ -134,10 +155,11 @@
 import {ref, onMounted, watch, onUnmounted, computed} from 'vue'
 import MasonryColumn from '../components/MasonryColumn.vue'
 import CustomSelect from '@/components/CustomSelect.vue'
-import {PicturePagePictureVo, picturePageQueryRequestByPost, WaterfallQueryRequest} from "../../../api/picture-service";
+import {PicturePagePictureVo, picturePageQueryRequestByPost, WaterfallQueryRequest, doFavoritePictureRequestByPost, undoFavoritePictureRequestByPost, PictureFavoriteRequest} from "../../../api/picture-service";
 import {message} from "../../../plugins/message";
 import {downloadImage} from "../../../utils";
 import {useRouter} from "vue-router";
+import {ResponseResult} from "../../../request";
 
 const router = useRouter()
 
@@ -151,6 +173,8 @@ const hasMore = ref(true)
 const columnCount = 3
 const maxTagCount = 4
 const loadedImageIds = new Set<number>() // 用于追踪已加载的图片ID
+const requestPaused = ref(false) // 是否暂停请求
+const errorMessage = ref('') // 错误信息
 
 const categories = ['自然风光', '城市建筑', '人物肖像', '动物世界', '美食佳肴', '旅行探险', '科技数码', '艺术设计', '体育运动']
 const tags = ['风景', '人像', '建筑', '旅行', '美食', '动物', '植物', '城市', '黑白', '夜景', '山水', '海洋', '街头', '创意', '复古']
@@ -185,6 +209,8 @@ const resetSearchParam = () => {
   }
   loadedImageIds.clear() // 清除已加载的图片ID记录
   hasMore.value = true
+  requestPaused.value = false // 重置暂停状态
+  errorMessage.value = '' // 清除错误信息
 }
 
 // ===== 事件处理方法 =====
@@ -218,17 +244,26 @@ const handleImageClick = (image: PicturePagePictureVo) => {
 }
 
 const handleLoadMore = async () => {
-  if (loading.value || !hasMore.value) return
+  if (loading.value || !hasMore.value || requestPaused.value) return
   loading.value = true
   await mockLoadImages()
   loading.value = false
 }
 
 const mockLoadImages = async () => {
+  // 如果请求被暂停，则不执行
+  if (requestPaused.value) {
+    loading.value = false
+    return
+  }
+  
   try {
     const res = await picturePageQueryRequestByPost(searchParam.value)
     if ((res as any).code !== 200) {
       message.error((res as any).message, (res as any).description)
+      // 设置暂停状态
+      requestPaused.value = true
+      errorMessage.value = (res as any).message || '获取图片失败'
       return
     }
 
@@ -252,8 +287,20 @@ const mockLoadImages = async () => {
   } catch (error) {
     console.error('加载图片失败:', error)
     message.error('加载失败', '请稍后重试')
+    // 设置暂停状态
+    requestPaused.value = true
+    errorMessage.value = '网络请求异常，请稍后重试'
   } finally {
     loading.value = false
+  }
+}
+
+// 添加重试功能
+const retryLoadImages = () => {
+  if (requestPaused.value) {
+    requestPaused.value = false
+    errorMessage.value = ''
+    mockLoadImages()
   }
 }
 
@@ -262,8 +309,39 @@ watch([searchQuery, selectedCategory, () => [...selectedTags.value]], () => {
   resetSearchParam()
 }, {deep: true})
 
-const toggleFavorite = (image: PicturePagePictureVo) => {
-  image.isFavorite = !image.isFavorite
+const toggleFavorite = async (image: PicturePagePictureVo) => {
+  try {
+    const request: PictureFavoriteRequest = {
+      id: image.id
+    }
+    
+    if (image.isFavorite) {
+      // 已点赞状态，调用取消点赞接口
+      const res = await undoFavoritePictureRequestByPost(request)
+      // 由于API响应已经在axios拦截器中被处理，我们直接获取返回的数据
+      const response = res as any
+      if (response && response.code === 200) {
+        image.isFavorite = false
+        message.success('已取消点赞', '')
+      } else {
+        message.error('操作失败', response && response.message ? response.message : '请稍后重试')
+      }
+    } else {
+      // 未点赞状态，调用点赞接口
+      const res = await doFavoritePictureRequestByPost(request)
+      // 由于API响应已经在axios拦截器中被处理，我们直接获取返回的数据
+      const response = res as any
+      if (response && response.code === 200) {
+        image.isFavorite = true
+        message.success('点赞成功', '')
+      } else {
+        message.error('操作失败', response && response.message ? response.message : '请稍后重试')
+      }
+    }
+  } catch (error) {
+    console.error('点赞操作失败:', error)
+    message.error('操作失败', '请稍后重试')
+  }
 }
 
 const handleShare = (image: PicturePagePictureVo) => {

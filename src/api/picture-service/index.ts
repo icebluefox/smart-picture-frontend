@@ -138,7 +138,6 @@ export interface PictureUploadRequest {
 }
 
 
-
 // 完整图片信息结构（更新核心部分）
 interface PictureVo {
     id: number;                  // 图片ID
@@ -162,6 +161,11 @@ interface PictureVo {
     user: UserVo;           // 上传者详细信息
 }
 
+export interface PictureFavoriteRequest {
+    id: Number
+}
+
+
 export const picturePageQueryRequestByPost = (picturePageQueryRequest: WaterfallQueryRequest) => {
     return myAxios.request<PageQueryResult<PicturePagePictureVo>>({
         method: "POST",
@@ -177,15 +181,15 @@ export const pictureDetailQueryRequestByGet = (id: string) => {
     })
 }
 
-export const pictureUploadRequestByPost = (file:File, pictureUploadRequest:PictureUploadRequest) => {
+export const pictureUploadRequestByPost = (file: File, pictureUploadRequest: PictureUploadRequest) => {
     const formData = new FormData();
     formData.append('file', file);
-    
+
     // 添加图片信息
     if (pictureUploadRequest.picName) {
         formData.append('picName', pictureUploadRequest.picName);
     }
-    
+
     if (pictureUploadRequest.category) {
         formData.append('category', pictureUploadRequest.category);
     }
@@ -195,15 +199,15 @@ export const pictureUploadRequestByPost = (file:File, pictureUploadRequest:Pictu
             formData.append('tags', tag);  // 每个 tag 单独追加
         });
     }
-    
+
     if (pictureUploadRequest.introduction) {
         formData.append('introduction', pictureUploadRequest.introduction);
     }
-    
+
     if (pictureUploadRequest.spaceId) {
         formData.append('spaceId', pictureUploadRequest.spaceId.toString());
     }
-    
+
     return myAxios.request({
         method: "POST",
         url: "/picture/upload",
@@ -212,4 +216,20 @@ export const pictureUploadRequestByPost = (file:File, pictureUploadRequest:Pictu
             'Content-Type': 'multipart/form-data'
         }
     });
+}
+
+export const doFavoritePictureRequestByPost = (pictureFavoriteRequest:PictureFavoriteRequest) => {
+    return myAxios.request({
+        method: "POST",
+        url: "/favorite/picture/do",
+        data:pictureFavoriteRequest
+    })
+}
+
+export const undoFavoritePictureRequestByPost = (pictureFavoriteRequest:PictureFavoriteRequest) => {
+    return myAxios.request({
+        method: "POST",
+        url: "/favorite/picture/undo",
+        data:pictureFavoriteRequest
+    })
 }

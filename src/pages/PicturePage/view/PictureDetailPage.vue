@@ -233,11 +233,12 @@
 <script setup lang="ts">
 import {onMounted, ref} from 'vue';
 import {useRoute} from "vue-router";
-import {pictureDetailQueryRequestByGet, PictureDetailVo} from "../../../api/picture-service";
+import {pictureDetailQueryRequestByGet, PictureDetailVo, doFavoritePictureRequestByPost, undoFavoritePictureRequestByPost, PictureFavoriteRequest} from "../../../api/picture-service";
 import constant from "../../../../collab-vision";
 import {downloadImage, formatSize, formatTime, toHexColor,} from "../../../utils";
 import {message} from "../../../plugins/message";
 import router from "../../../router";
+import {ResponseResult} from "../../../request";
 
 const route = useRoute()
 const loading = ref(true);
@@ -268,13 +269,44 @@ const pictureDetail = ref<PictureDetailVo>({
 /**
  * 切换点赞状态
  * 该函数在用户点击点赞按钮时触发，会切换点赞状态
- * 在实际应用中，这里应该发送API请求到服务器更新点赞状态
  */
-const toggleFavorite = () => {
-  pictureDetail.value.isFavorite = !pictureDetail.value.isFavorite;
-  // 实际开发中应该在这里调用API
-  // 例如: await api.toggleFavorite(pictureId, pictureDetail.isFavorite.value);
-  console.log('点赞状态:', pictureDetail.value.isFavorite ? '已点赞' : '取消点赞');
+const toggleFavorite = async () => {
+  try {
+    const request: PictureFavoriteRequest = {
+      id: pictureDetail.value.id
+    }
+    
+    if (pictureDetail.value.isFavorite) {
+      // 已点赞状态，调用取消点赞接口
+      const res = await undoFavoritePictureRequestByPost(request)
+      // 由于API响应已经在axios拦截器中被处理，我们直接获取返回的数据
+      const response = res as any
+      if (response && response.code === 200) {
+        pictureDetail.value.isFavorite = false
+        if (pictureDetail.value.favoriteCount > 0) {
+          pictureDetail.value.favoriteCount--
+        }
+        message.success('已取消点赞', '')
+      } else {
+        message.error('操作失败', response && response.message ? response.message : '请稍后重试')
+      }
+    } else {
+      // 未点赞状态，调用点赞接口
+      const res = await doFavoritePictureRequestByPost(request)
+      // 由于API响应已经在axios拦截器中被处理，我们直接获取返回的数据
+      const response = res as any
+      if (response && response.code === 200) {
+        pictureDetail.value.isFavorite = true
+        pictureDetail.value.favoriteCount++
+        message.success('点赞成功', '')
+      } else {
+        message.error('操作失败', response && response.message ? response.message : '请稍后重试')
+      }
+    }
+  } catch (error) {
+    console.error('点赞操作失败:', error)
+    message.error('操作失败', '请稍后重试')
+  }
 };
 
 /**
