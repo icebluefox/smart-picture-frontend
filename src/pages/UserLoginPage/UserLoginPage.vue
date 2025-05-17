@@ -168,7 +168,8 @@ const userStore = useUserStore()
 const loading = ref(false)
 const loginFormData = ref<UserLoginRequest>({
   username: "",
-  password: ""
+  password: "",
+  platform: 1
 })
 const showPassword = ref(false);
 
