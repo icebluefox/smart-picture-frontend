@@ -25,6 +25,7 @@ export interface UserVo {
     email: string,
     avatar: string,
     role: string
+    expireTime:Number
 }
 
 export const userLoginRequestByPost = (userLoginRequest: UserLoginRequest) => {

@@ -1,4 +1,4 @@
-import {createRouter, createWebHashHistory, createWebHistory} from 'vue-router'
+import {createRouter,createWebHistory} from 'vue-router'
 // @ts-ignore
 import HomePage from "../pages/HomePage/HomePage.vue";
 // @ts-ignore
@@ -17,7 +17,7 @@ import {mainRoutes, otherRoutes} from "./routes";
 import {useUserStore} from "@/stores/useUserStore";
 
 const router = createRouter({
-    history: createWebHashHistory(import.meta.env.BASE_URL),
+    history: createWebHistory(import.meta.env.BASE_URL),
     routes: [
         ...mainRoutes,
         ...otherRoutes

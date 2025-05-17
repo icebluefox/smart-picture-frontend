@@ -16,37 +16,37 @@
           <!-- 渐变定义 -->
           <defs>
             <linearGradient id="gradient1" x1="40" y1="40" x2="100" y2="180" gradientUnits="userSpaceOnUse">
-              <stop offset="0%" stop-color="#8B5CF6"/>
-              <stop offset="100%" stop-color="#4F46E5"/>
+              <stop offset="0%" stop-color="#4F46E5"/>
+              <stop offset="100%" stop-color="#4338CA"/>
             </linearGradient>
             <linearGradient id="gradient2" x1="120" y1="40" x2="190" y2="180" gradientUnits="userSpaceOnUse">
-              <stop offset="0%" stop-color="#8B5CF6"/>
-              <stop offset="100%" stop-color="#4F46E5"/>
+              <stop offset="0%" stop-color="#4F46E5"/>
+              <stop offset="100%" stop-color="#4338CA"/>
             </linearGradient>
             <linearGradient id="gradient3" x1="210" y1="60" x2="250" y2="180" gradientUnits="userSpaceOnUse">
-              <stop offset="0%" stop-color="#8B5CF6"/>
-              <stop offset="100%" stop-color="#4F46E5"/>
+              <stop offset="0%" stop-color="#4F46E5"/>
+              <stop offset="100%" stop-color="#4338CA"/>
             </linearGradient>
             <linearGradient id="gradient4" x1="20" y1="20" x2="220" y2="220" gradientUnits="userSpaceOnUse">
-              <stop offset="0%" stop-color="#C4B5FD"/>
-              <stop offset="100%" stop-color="#4F46E5"/>
+              <stop offset="0%" stop-color="#818CF8"/>
+              <stop offset="100%" stop-color="#4338CA"/>
             </linearGradient>
             <linearGradient id="gradient5" x1="60" y1="60" x2="180" y2="180" gradientUnits="userSpaceOnUse">
-              <stop offset="0%" stop-color="#A78BFA"/>
-              <stop offset="100%" stop-color="#4338CA"/>
+              <stop offset="0%" stop-color="#6366F1"/>
+              <stop offset="100%" stop-color="#3730A3"/>
             </linearGradient>
           </defs>
         </svg>
         
         <!-- 漂浮的几何元素 -->
-        <div class="absolute top-0 left-1/4 w-8 h-8 bg-purple-300 rounded-full opacity-70 animate-float"></div>
+        <div class="absolute top-0 left-1/4 w-8 h-8 bg-indigo-300 rounded-full opacity-70 animate-float"></div>
         <div class="absolute bottom-1/4 right-1/4 w-6 h-6 bg-indigo-400 rounded-full opacity-60 animate-float-delay"></div>
-        <div class="absolute top-1/3 right-1/4 w-4 h-4 bg-purple-400 rounded opacity-50 animate-float-slow"></div>
+        <div class="absolute top-1/3 right-1/4 w-4 h-4 bg-indigo-400 rounded opacity-50 animate-float-slow"></div>
         <div class="absolute bottom-0 left-1/3 w-5 h-5 bg-indigo-300 rounded-lg opacity-50 animate-float-reverse"></div>
       </div>
       
       <!-- 文字内容 -->
-      <h1 class="text-4xl font-bold mb-4 text-transparent bg-clip-text bg-gradient-to-r from-purple-600 to-indigo-700">
+      <h1 class="text-4xl font-bold mb-4 text-transparent bg-clip-text bg-gradient-to-r from-indigo-600 to-indigo-700">
         页面未找到
       </h1>
       <p class="text-lg text-gray-600 mb-8 max-w-xl mx-auto">
@@ -54,7 +54,7 @@
       </p>
       
       <!-- 返回首页按钮 -->
-      <router-link to="/" class="inline-flex items-center px-6 py-3 bg-gradient-to-r from-purple-600 to-indigo-700 text-white font-medium rounded-md shadow-lg hover:from-purple-700 hover:to-indigo-800 transition-all duration-300 transform hover:scale-105">
+      <router-link to="/" class="inline-flex items-center px-6 py-3 bg-indigo-600 text-white font-medium rounded-md shadow-lg hover:bg-indigo-700 transition-all duration-300 transform hover:scale-105">
         <svg class="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
           <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 19l-7-7m0 0l7-7m-7 7h18"></path>
         </svg>
@@ -65,19 +65,19 @@
       <div class="mt-12 pt-8 border-t border-gray-200">
         <h3 class="text-xl font-medium text-gray-800 mb-4">您可能感兴趣的内容</h3>
         <div class="flex flex-wrap justify-center gap-3 max-w-2xl mx-auto">
-          <router-link to="/" class="px-4 py-2 rounded-md border border-indigo-200 text-indigo-700 hover:bg-indigo-50 transition-colors duration-200">
+          <router-link to="/" class="px-4 py-2 rounded-md border border-indigo-200 text-indigo-600 hover:bg-indigo-50 transition-colors duration-200">
             热门图片
           </router-link>
-          <router-link to="/" class="px-4 py-2 rounded-md border border-indigo-200 text-indigo-700 hover:bg-indigo-50 transition-colors duration-200">
+          <router-link to="/" class="px-4 py-2 rounded-md border border-indigo-200 text-indigo-600 hover:bg-indigo-50 transition-colors duration-200">
             风景摄影
           </router-link>
-          <router-link to="/" class="px-4 py-2 rounded-md border border-indigo-200 text-indigo-700 hover:bg-indigo-50 transition-colors duration-200">
+          <router-link to="/" class="px-4 py-2 rounded-md border border-indigo-200 text-indigo-600 hover:bg-indigo-50 transition-colors duration-200">
             艺术创作
           </router-link>
-          <router-link to="/" class="px-4 py-2 rounded-md border border-indigo-200 text-indigo-700 hover:bg-indigo-50 transition-colors duration-200">
+          <router-link to="/" class="px-4 py-2 rounded-md border border-indigo-200 text-indigo-600 hover:bg-indigo-50 transition-colors duration-200">
             城市建筑
           </router-link>
-          <router-link to="/" class="px-4 py-2 rounded-md border border-indigo-200 text-indigo-700 hover:bg-indigo-50 transition-colors duration-200">
+          <router-link to="/" class="px-4 py-2 rounded-md border border-indigo-200 text-indigo-600 hover:bg-indigo-50 transition-colors duration-200">
             人像摄影
           </router-link>
         </div>

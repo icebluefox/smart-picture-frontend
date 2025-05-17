@@ -60,7 +60,7 @@
 
                 <!-- 搜索按钮 - 固定在右侧 -->
                 <button
-                    class="bg-gradient-to-r from-purple-600 to-indigo-700 hover:from-purple-700 hover:to-indigo-800 text-white p-2 rounded-md shadow-sm transition-colors absolute right-2 top-1/2 -translate-y-1/2"
+                    class="bg-indigo-600 hover:bg-indigo-700 text-white p-2 rounded-md shadow-sm transition-colors absolute right-2 top-1/2 -translate-y-1/2"
                     @click="handleSearch"
                 >
                   <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">

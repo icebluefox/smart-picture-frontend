@@ -33,8 +33,20 @@ export const useUserStore = defineStore('userStore', () => {
                 loginUser.value = null
                 return loginUser.value;
             }
-            loginUser.value = JSON.parse(decrypt(loginUserStr)) as UserVo
+
+            const localUserInfo = JSON.parse(decrypt(loginUserStr)) as UserVo
+            const currentTime = new Date().getTime();
+            // 过期状态
+            // @ts-ignore
+            if (localUserInfo.expireTime < currentTime) {
+                // 删除本地用户信息
+                localStorage.removeItem(LOCAL_STORAGE_KEY);
+                return null;
+            }
+            // 未过期 从远程获取用户信息
+            fetchLoginUser().then(r => {});
         }
+
         return loginUser.value;
     }
 

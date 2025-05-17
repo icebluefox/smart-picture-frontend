@@ -110,6 +110,10 @@
               <span class="text-xs text-gray-500">浏览</span>
             </div>
             <div class="flex flex-col items-center">
+              <span class="text-gray-900 font-medium">{{ pictureDetail.favoriteCount }}</span>
+              <span class="text-xs text-gray-500">点赞</span>
+            </div>
+            <div class="flex flex-col items-center">
               <span class="text-gray-900 font-medium">{{ pictureDetail.downloadCount }}</span>
               <span class="text-xs text-gray-500">下载</span>
             </div>
