@@ -66,3 +66,10 @@ export const sendEmailCodeRequestByPost = (sendEmailRequest: SendEmailRequest) =
         data: sendEmailRequest
     })
 }
+
+export const getSearchUserInfoRequestByGet = (id:Number)=>{
+    return myAxios.request({
+        method:"get",
+        url:`/user/search/${id}`
+    })
+}

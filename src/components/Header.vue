@@ -90,7 +90,7 @@
                             </svg>
                           </div>
                           <div>
-                            <a href="/profile" class="font-medium text-gray-900">
+                            <a :href="`/user/${userStore.getLoginUser().id}`" class="font-medium text-gray-900">
                               我的信息
                               <span class="absolute inset-0"></span>
                             </a>

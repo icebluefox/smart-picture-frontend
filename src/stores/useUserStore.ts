@@ -43,8 +43,8 @@ export const useUserStore = defineStore('userStore', () => {
                 localStorage.removeItem(LOCAL_STORAGE_KEY);
                 return null;
             }
-            // 未过期 从远程获取用户信息
-            fetchLoginUser().then(r => {});
+
+            loginUser.value = localUserInfo
         }
 
         return loginUser.value;
@@ -59,6 +59,8 @@ export const useUserStore = defineStore('userStore', () => {
         if (res.code == 200 && res.data) {
             loginUser.value = res.data
         }
+
+        return loginUser.value
     }
 
     /**

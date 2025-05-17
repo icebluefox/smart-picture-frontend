@@ -6,6 +6,7 @@ import UserRegisterPage from "../pages/UserRegisterPage/UserRegisterPage.vue";
 import MessageDemo from "../pages/MessageDemo.vue";
 import NotFoundPage from "../pages/NotFound/NotFoundPage.vue";
 import SpacePage from "../pages/SpacePage/SpacePage.vue";
+import UserInfoPage from "@/pages/UserInfoPage/UserInfoPage.vue";
 
 export const mainRoutes = [
     {
@@ -57,6 +58,11 @@ export const otherRoutes = [
         path: '/register',
         name: 'userRegister',
         component: UserRegisterPage
+    },
+    {
+        path: '/user/:id',
+        name: 'userInfo',
+        component: UserInfoPage
     },
     {
         path: '/message-demo',
