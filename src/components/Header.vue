@@ -90,10 +90,10 @@
                             </svg>
                           </div>
                           <div>
-                            <a :href="`/user/${userStore.getLoginUser().id}`" class="font-medium text-gray-900">
+                            <router-link :to="`/user/${userStore.getLoginUser().id}`" class="font-medium text-gray-900">
                               我的信息
                               <span class="absolute inset-0"></span>
-                            </a>
+                            </router-link>
                             <p class="mt-0.5 text-xs text-gray-500">查看和编辑个人资料</p>
                           </div>
                         </div>

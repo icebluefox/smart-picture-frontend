@@ -117,8 +117,8 @@
 
           <!-- 其他登录方式 -->
           <div class="pt-3 flex justify-between items-center border-t border-gray-200 mt-3">
-            <div class="text-sm text-gray-600">还没有账号？<a href="/register"
-                                                             class="text-indigo-600 hover:text-indigo-800 font-medium transition-colors">立即注册</a>
+            <div class="text-sm text-gray-600">还没有账号？<router-link to="/register"
+                                                             class="text-indigo-600 hover:text-indigo-800 font-medium transition-colors">立即注册</router-link>
             </div>
             <div class="flex space-x-3">
               <div class="text-center">

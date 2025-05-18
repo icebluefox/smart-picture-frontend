@@ -3,6 +3,7 @@ import myAxios from "../../request";
 export interface UserLoginRequest {
     username: string
     password: string
+    platform:number
 }
 
 export interface UserRegisterRequest {
